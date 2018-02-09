@@ -20,6 +20,7 @@ def title():
     menu_select_bar_rect.top = 295
     menu_select_bar_rect.left = 225
     menu_num = 0
+
     while not done:
 
         quit()
@@ -49,7 +50,6 @@ def game_play(index):
     if index == 0:
 
         done = False
-        pressed = pg.key.get_pressed()
 
         with open('high_score_easy.txt','r') as f:
             line=f.readline()
@@ -57,6 +57,9 @@ def game_play(index):
         name = line.split(',')[0]
         score = line.split(',')[1]
         current_score = 0
+
+        name_surface = font.render(name,False,(0,0,0))
+        best_score_surface = font.render(score,False,(0,0,0))
 
         me = rect()
         me.rect.center = (300, 300)
@@ -80,6 +83,8 @@ def game_play(index):
             for i in range(4):
                 pg.draw.rect(screen, blue, enemy_list[i].rect)
             screen.blit(score_surface, (0, 0))
+            screen.blit(name_surface, (0,550))
+            screen.blit(best_score_surface, (400,550))
             me.move()
 
             for i in range(4):
@@ -89,6 +94,7 @@ def game_play(index):
 
             pg.display.flip()
             current_score += 1
+
         if current_score > int(score):
             name = input_box()
             score = current_score
@@ -100,7 +106,6 @@ def game_play(index):
     elif index == 1:
 
         done = False
-        pressed = pg.key.get_pressed()
 
         with open('high_score_hard.txt', 'r') as f:
             line = f.readline()
@@ -108,6 +113,9 @@ def game_play(index):
         name = line.split(',')[0]
         score = line.split(',')[1]
         current_score = 0
+
+        name_surface = font.render(name, False, (0, 0, 0))
+        best_score_surface = font.render(score, False, (0, 0, 0))
 
         me = rect()
         me.rect.center = (300, 300)
@@ -131,6 +139,8 @@ def game_play(index):
             for i in range(10):
                 pg.draw.rect(screen, blue, enemy_list[i].rect)
             screen.blit(score_surface, (0, 0))
+            screen.blit(name_surface, (0, 550))
+            screen.blit(best_score_surface, (400, 550))
             me.move()
 
             for i in range(10):
@@ -147,7 +157,3 @@ def game_play(index):
 
             with open('high_score_hard.txt', 'w') as f:
                 f.write('%s,%s' % (name, score))
-
-index = title()
-print(index)
-game_play(index)

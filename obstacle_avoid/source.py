@@ -24,6 +24,9 @@ def input_box():
     color = color_inactive
     input_box = pg.Rect(100, 100, 140, 32)
 
+    ment = 'YOU ARE THE BEST SCORE!!!'
+    ment_surface = ment_font.render(ment,False,(0,0,0))
+
     active = False
     text = ''
     done = False
@@ -54,6 +57,7 @@ def input_box():
         input_box.w = width
         # Blit the text.
         screen.blit(txt_surface, (input_box.x + 5, input_box.y))
+        screen.blit(ment_surface, (5,300))
         # Blit the input_box rect.
         pg.draw.rect(screen, color, input_box, 2)
 
@@ -67,3 +71,4 @@ pg.font.init()
 
 screen = pg.display.set_mode((600,600))
 font = pg.font.SysFont('Arial',32)
+ment_font = pg.font.SysFont('Arial', 50)
